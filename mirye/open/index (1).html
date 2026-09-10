@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>오픈 준비 안내 · 미례국밥</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+:root{
+  --ink:#191512;
+  --ink-2:#5C534C;
+  --paper:#FFFFFF;
+  --fill:#F3F0EC;
+  --line:#DCD5CD;
+  --brick:#A63328;
+  --brick-dark:#832519;
+  --done:#1C6B45;
+  --warn:#8A5A00;
+  --warn-fill:#FDF3DC;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--fill);
+  color:var(--ink);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:21px;
+  line-height:1.7;
+  word-break:keep-all;
+}
+.wrap{max-width:600px;margin:0 auto;background:var(--paper);min-height:100vh;
+  display:flex;flex-direction:column;box-shadow:0 0 0 1px var(--line)}
+
+/* ── 상단 진행 표시 ── */
+header{position:sticky;top:0;z-index:10;background:var(--paper);
+  border-bottom:1px solid var(--line);padding:14px 22px 0}
+.hrow{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.hstore{font-size:17px;color:var(--ink-2);font-weight:600;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hcount{font-size:17px;color:var(--ink-2);font-variant-numeric:tabular-nums;flex:none}
+.bar{height:6px;background:var(--line);border-radius:99px;margin:12px 0 14px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--brick);width:0;
+  transition:width .35s cubic-bezier(.2,.7,.3,1)}
+header.hidden{display:none}
+
+/* ── 본문 ── */
+main{flex:1;padding:30px 22px 24px}
+h1{font-size:38px;line-height:1.28;letter-spacing:-.02em;margin:0 0 18px;font-weight:800}
+h2{font-size:29px;line-height:1.35;letter-spacing:-.015em;margin:0 0 20px;font-weight:800}
+h3{font-size:22px;margin:32px 0 10px;font-weight:700}
+p{margin:0 0 18px}
+.lead{font-size:22px}
+.muted{color:var(--ink-2)}
+b,strong{font-weight:700}
+ol,ul{margin:0 0 18px;padding-left:1.4em}
+li{margin-bottom:12px}
+a{color:var(--brick-dark)}
+
+/* ── 표지 ── */
+.dday{font-size:15px;font-weight:700;color:var(--brick);margin:0 0 10px;
+  letter-spacing:.02em}
+.dnum{font-size:76px;font-weight:800;letter-spacing:-.04em;line-height:1;
+  color:var(--brick);font-variant-numeric:tabular-nums}
+.cover-meta{border-top:1px solid var(--line);margin-top:30px;padding-top:22px}
+.cover-meta div{display:flex;gap:14px;margin-bottom:10px;font-size:19px}
+.cover-meta span:first-child{color:var(--ink-2);flex:none;width:74px}
+
+/* ── 할 일 카드 ── */
+.task{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:12px}
+.task-n{font-size:16px;font-weight:700;color:var(--brick);margin-bottom:4px}
+.task-t{font-size:21px;font-weight:700;margin-bottom:6px}
+.task-d{font-size:18px;color:var(--ink-2)}
+
+/* ── 안내 상자 ── */
+.box{background:var(--fill);border-radius:12px;padding:20px 22px;margin:0 0 20px}
+.box p:last-child,.box ul:last-child,.box ol:last-child{margin-bottom:0}
+.box-warn{background:var(--warn-fill);color:var(--warn)}
+.box-warn strong{color:var(--warn)}
+.box-title{font-weight:700;margin-bottom:8px}
+
+/* ── 복사 항목 ── */
+.copy{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+.copy-l{font-size:16px;color:var(--ink-2);margin-bottom:6px}
+.copy-v{font-size:21px;font-weight:600;line-height:1.5;margin-bottom:12px;
+  word-break:break-all}
+.copy-b{display:block;width:100%;min-height:52px;border:1.5px solid var(--line);
+  background:var(--paper);border-radius:9px;font:inherit;font-size:18px;font-weight:700;
+  color:var(--ink);cursor:pointer}
+.copy-b.ok{border-color:var(--done);color:var(--done)}
+
+/* ── 체크 ── */
+.chk{display:flex;gap:14px;align-items:flex-start;border:1.5px solid var(--line);
+  border-radius:12px;padding:16px 18px;margin-bottom:10px;cursor:pointer;
+  font-size:20px;line-height:1.5}
+.chk input{width:28px;height:28px;margin:2px 0 0;flex:none;accent-color:var(--done)}
+.chk.on{border-color:var(--done);background:#F2F8F5}
+
+/* ── 캡처 자리 ── */
+.shot{border:2px dashed var(--line);border-radius:12px;padding:34px 18px;
+  text-align:center;color:var(--ink-2);font-size:17px;margin:0 0 20px}
+.shot img{max-width:100%;border-radius:8px;display:block}
+
+/* ── 버튼 ── */
+.cta{display:block;width:100%;min-height:66px;padding:16px 20px;border:0;
+  border-radius:12px;background:var(--brick);color:#fff;font:inherit;font-size:22px;
+  font-weight:700;cursor:pointer;text-align:center;text-decoration:none;
+  line-height:1.35;margin-bottom:12px}
+.cta:active{background:var(--brick-dark)}
+.cta[disabled]{background:var(--line);color:#9A928B;cursor:default}
+.cta-2{background:var(--paper);color:var(--ink);border:1.5px solid var(--line)}
+.cta-2:active{background:var(--fill)}
+
+/* ── 하단 ── */
+footer{position:sticky;bottom:0;background:var(--paper);border-top:1px solid var(--line);
+  padding:16px 22px calc(16px + env(safe-area-inset-bottom))}
+.back{display:block;width:100%;min-height:50px;background:none;border:0;font:inherit;
+  font-size:18px;color:var(--ink-2);cursor:pointer;margin-top:2px}
+
+.hide{display:none!important}
+:focus-visible{outline:3px solid var(--brick);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:400px){
+  body{font-size:20px}
+  h1{font-size:33px} h2{font-size:26px} .dnum{font-size:64px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header id="hd">
+    <div class="hrow">
+      <div class="hstore" id="hdStore"></div>
+      <div class="hcount" id="hdCount"></div>
+    </div>
+    <div class="bar"><i id="hdBar"></i></div>
+  </header>
+  <main id="main"></main>
+  <footer id="ft"></footer>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   ① 매장 목록 — 매장이 늘어나면 여기에 한 덩어리만 추가하세요.
+      주소창 뒤에 ?s=코드 를 붙이면 그 매장 안내서가 열립니다.
+      예) .../open/?s=ulsan-samsan
+   ═══════════════════════════════════════════════════════════ */
+const STORES = {
+
+  "ulsan-samsan": {
+    name:      "미례국밥 울산삼산점",
+    address:   "울산 남구 삼산중로 54, 1층",
+    phone:     "052-258-2371",
+    openDate:  "2026-09-17",
+
+    // ▼ 카카오맵에 넣을 본사 지정값 (확인 후 수정하세요)
+    intro: "정직하게 끓인 국밥 한 그릇",          // 한줄소개 · 50자 이내
+    tags:  ["돼지국밥","삼산동맛집","점심식사","혼밥","수육"],  // 최대 5개 · 각 8자 이내
+    pick:  ["",""],                              // 카카오맵 추천메뉴 2개
+    sns:   "",                                   // 브랜드 인스타그램 주소
+    menuFileUrl: ""                              // 메뉴 사진·가격표 다운로드 주소
+  }
+
+};
+
+/* 전 매장 공통 */
+const RADIO_URL = "https://www.brandradio.co.kr/member/cms.html?code=mirye";
+const RADIO_LEAD = 3;   // 브랜드 라디오 마감 = 오픈 며칠 전
+const KAKAO_LEAD = 5;   // 카카오 마감 = 오픈 며칠 전
+
+/* ═══════════════════════════════════════════════════════════
+   ② 아래부터는 손대지 않으셔도 됩니다.
+   ═══════════════════════════════════════════════════════════ */
+
+const KEYS = Object.keys(STORES);
+const code = new URLSearchParams(location.search).get("s") || KEYS[0];
+const S = STORES[code] || STORES[KEYS[0]];
+
+const DAY = 864e5;
+const today = new Date(); today.setHours(0,0,0,0);
+const open = new Date(S.openDate + "T00:00:00");
+const dday = Math.round((open - today) / DAY);
+const fmt = d => (d.getMonth()+1) + "월 " + d.getDate() + "일";
+const due = n => fmt(new Date(open.getTime() - n*DAY));
+const late = n => Math.round((new Date(open.getTime()-n*DAY) - today)/DAY) <= 0;
+
+const dueRadio = late(RADIO_LEAD) ? "오늘 바로" : due(RADIO_LEAD) + "까지";
+const dueKakao = late(KAKAO_LEAD) ? "오늘 바로" : due(KAKAO_LEAD) + "까지";
+
+const shot = t => '<div class="shot">📷 화면 캡처 자리<br>' + t + '</div>';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const copy = (label, val) => !val ? '' :
+  '<div class="copy"><div class="copy-l">' + label + '</div>' +
+  '<div class="copy-v">' + esc(val) + '</div>' +
+  '<button class="copy-b" data-copy="' + esc(val) + '">복사하기</button></div>';
+
+/* ── 화면 목록 ─────────────────────────────────────────── */
+const STEPS = [];
+
+/* 0. 표지 */
+STEPS.push({ cover:true, cta:"시작하기", html:
+  '<p class="dday">오픈까지</p>' +
+  '<p class="dnum">' + (dday > 0 ? dday + '일' : '오늘') + '</p>' +
+  '<h1>사장님, 오픈 전에<br>두 가지만 해주세요.</h1>' +
+  '<p class="lead muted">순서대로 따라오시면 됩니다. 한 화면에 하나씩만 나오니 천천히 하셔도 됩니다.</p>' +
+  '<div class="task"><div class="task-n">첫 번째 · ' + dueRadio + '</div>' +
+    '<div class="task-t">브랜드 라디오 가입</div>' +
+    '<div class="task-d">매장에서 음악을 틀기 위한 가입입니다. 약 5분</div></div>' +
+  '<div class="task"><div class="task-n">두 번째 · ' + dueKakao + '</div>' +
+    '<div class="task-t">카카오맵에 매장 올리기</div>' +
+    '<div class="task-d">손님이 검색해서 찾아올 수 있게 합니다. 약 30분</div></div>' +
+  '<div class="cover-meta">' +
+    '<div><span>매장</span><span>' + esc(S.name) + '</span></div>' +
+    '<div><span>주소</span><span>' + esc(S.address) + '</span></div>' +
+    '<div><span>오픈</span><span>' + fmt(open) + '</span></div>' +
+  '</div>'
+});
+
+/* 1. 준비물 */
+STEPS.push({ title:"먼저 이것부터 모아주세요", gate:true, cta:"다 모았습니다", html:
+  '<p>중간에 이게 없어서 멈추는 경우가 가장 많습니다. 먼저 다섯 가지를 챙기시면 한 번에 끝납니다.</p>' +
+  ['사업자등록증 사진 또는 파일<br><span class="muted" style="font-size:17px">휴대폰으로 찍어두셔도 됩니다</span>',
+   '매장에서 쓰실 카카오 아이디와 비밀번호',
+   '매장 전화번호 · 주소',
+   '영업시간과 쉬는 날',
+   '본사가 보내드린 메뉴 사진과 가격표'
+  ].map((t,i) => '<label class="chk"><input type="checkbox" data-prep="' + i + '"><span>' + t + '</span></label>').join('') +
+  '<div class="box"><div class="box-title">카카오 아이디는 어느 걸로 하나요?</div>' +
+  '<p>평소 쓰시는 개인 카카오톡 아이디를 그대로 쓰셔도 됩니다. 앞으로 손님 후기에 답글을 달거나 영업시간을 고칠 때 계속 이 아이디로 들어가시게 됩니다.</p>' +
+  '<p><b>직원분 아이디로는 하지 마세요.</b> 나중에 그만두시면 매장 정보를 못 고치게 됩니다.</p></div>'
+});
+
+/* 2. 브랜드 라디오 */
+STEPS.push({ title:"브랜드 라디오 가입", cta:"가입했습니다", html:
+  '<p>매장에서 음악을 틀려면 매장용 음악 서비스에 가입되어 있어야 합니다. 개인 유튜브나 개인 멜론으로 틀면 저작권 문제가 생깁니다.</p>' +
+  '<p>가입하시면 <b>미례국밥에 맞는 음악이 알아서 나옵니다.</b> 곡을 직접 고르실 필요가 없습니다.</p>' +
+  '<a class="cta" href="' + RADIO_URL + '" target="_blank" rel="noopener">가입 화면 열기</a>' +
+  '<p class="muted" style="font-size:18px">새 창이 열립니다. 가입을 마치신 뒤 이 화면으로 돌아와 아래 버튼을 눌러주세요.</p>' +
+  '<h3>이렇게 입력하세요</h3>' +
+  copy("매장명", S.name) +
+  copy("매장 주소", S.address) +
+  copy("매장 전화번호", S.phone) +
+  '<div class="box"><p>사업자등록번호와 대표자 이름은 <b>사업자등록증에 적힌 그대로</b> 넣어주세요. 한 글자라도 다르면 승인이 늦어집니다.</p></div>'
+});
+
+/* 3. 카카오 시작 */
+STEPS.push({ title:"카카오 비즈니스 접속하기", cta:"로그인했습니다", html:
+  '<p>여기부터는 카카오맵 작업입니다. 손님이 <b>“' + esc(S.name) + '”</b>을 검색했을 때 위치·영업시간·메뉴가 나오게 만드는 일입니다.</p>' +
+  '<ol>' +
+  '<li>인터넷 주소창에 <b>business.kakao.com</b> 을 입력해 들어갑니다.</li>' +
+  '<li>오른쪽 위 <b>[로그인]</b>을 눌러 준비하신 카카오 아이디로 들어갑니다.</li>' +
+  '<li>처음이시면 약관 동의 화면이 나옵니다. 안내대로 넘기시면 됩니다.</li>' +
+  '</ol>' +
+  copy("접속 주소", "business.kakao.com") +
+  shot('로그인 화면') +
+  '<div class="box"><p><b>컴퓨터로 하시길 권합니다.</b> 휴대폰으로도 되지만 입력할 게 많아서 컴퓨터가 훨씬 수월합니다.</p></div>'
+});
+
+/* 4. 새 매장 만들기 */
+STEPS.push({ title:"새 매장 만들기", cta:"눌렀습니다", html:
+  '<ol>' +
+  '<li>왼쪽 메뉴에서 <b>[매장]</b>을 찾아 누릅니다.</li>' +
+  '<li><b>[새 매장 만들기]</b>를 누릅니다.</li>' +
+  '<li>어떤 유형으로 만들지 고르는 화면이 나옵니다. <b>카카오맵 매장을 만드는 쪽</b>을 고르세요.</li>' +
+  '</ol>' +
+  shot('[새 매장 만들기] 버튼 위치') +
+  '<div class="box box-warn"><p><b>카카오톡 채널은 여기서 같이 만들지 마세요.</b> 채널은 본사에서 따로 안내드립니다.</p></div>' +
+  '<div class="box"><p>왼쪽 메뉴가 안 보이시면, 화면을 아래로 내려보시거나 왼쪽 위 <b>줄 세 개 표시(☰)</b>를 눌러보세요.</p></div>'
+});
+
+/* 5. 사업자번호 조회 */
+STEPS.push({ title:"사업자등록번호로 찾기", cta:"신청했습니다", html:
+  '<p>사업자등록번호를 넣고 조회합니다. 결과에 따라 두 가지로 갈립니다.</p>' +
+  shot('사업자등록번호 조회 화면') +
+  '<h3>목록에 우리 매장이 보이면</h3>' +
+  '<p class="muted" style="font-size:18px">그 자리에 있던 예전 가게 정보가 남아있는 경우입니다. 정상입니다.</p>' +
+  '<ol>' +
+  '<li>그 매장을 고르고 <b>[관리자 권한 등록하기]</b>를 누릅니다.</li>' +
+  '<li>이미 적혀 있는 정보를 <b>우리 매장 정보로 고칩니다.</b> 특히 매장 이름과 전화번호를 꼭 확인하세요.</li>' +
+  '<li><b>사업자등록증 파일을 첨부합니다.</b> 이 경우에는 반드시 필요합니다.</li>' +
+  '<li><b>[등록하기]</b>를 누릅니다.</li>' +
+  '</ol>' +
+  '<h3>목록에 우리 매장이 없으면</h3>' +
+  '<ol>' +
+  '<li>목록 맨 아래 <b>[내 매장을 새로 등록할래요]</b>를 누릅니다.</li>' +
+  '<li>다음 화면에서 매장 정보를 처음부터 넣습니다.</li>' +
+  '</ol>'
+});
+
+/* 6. 매장 정보 입력 */
+STEPS.push({ title:"매장 정보 넣기", cta:"다 넣었습니다", html:
+  '<p>새로 만드실 필요 없습니다. <b>아래 [복사하기]를 누르고 그대로 붙여넣으세요.</b></p>' +
+  copy("매장 이름 — 띄어쓰기까지 이대로", S.name) +
+  copy("주소", S.address) +
+  copy("전화번호", S.phone) +
+  copy("한줄소개", S.intro) +
+  copy("태그 — 하나씩 나눠서 넣으세요", S.tags.join(", ")) +
+  (S.sns ? copy("홈페이지 / SNS", S.sns) : '') +
+  '<div class="box">' +
+  '<div class="box-title">직접 넣으실 항목</div>' +
+  '<ul style="margin-bottom:0">' +
+  '<li><b>업종</b> — 음식점 › 한식 › 국밥</li>' +
+  '<li><b>영업시간과 쉬는 날</b> — 우리 매장에 맞게</li>' +
+  '<li><b>제공 서비스</b> — 주차, 포장 등 해당하는 것만 체크</li>' +
+  '</ul></div>' +
+  '<p>다 넣으셨으면 <b>[등록하기]</b>를 누릅니다.</p>'
+});
+
+/* 7. 심사 */
+STEPS.push({ title:"결과 기다리기", cta:"확인했습니다", html:
+  '<p>신청하시면 카카오에서 확인 절차를 거칩니다. <b>결과는 가입하신 카카오 아이디의 카카오톡으로 옵니다.</b> 카카오톡을 확인해 주세요.</p>' +
+  '<p>통과되면 다음 화면으로 넘어가시면 됩니다.</p>' +
+  '<div class="box box-warn">' +
+  '<div class="box-title">“보류” 라고 오면</div>' +
+  '<p>당황하지 않으셔도 됩니다. 흔한 일입니다.</p>' +
+  '<ol style="margin-bottom:12px">' +
+  '<li><b>[매장] › [매장 관리 이력]</b>으로 들어갑니다.</li>' +
+  '<li>매장 이름을 누르면 <b>왜 보류됐는지 이유</b>가 나옵니다.</li>' +
+  '<li>이유대로 고쳐서 다시 신청합니다.</li>' +
+  '</ol>' +
+  '<p style="margin-bottom:0"><b>다시 신청하실 때는 전에 냈던 서류까지 전부 다시 첨부하세요.</b> 빠진 것 하나만 올리시면 또 보류됩니다.</p>' +
+  '</div>' +
+  '<p>이유를 봐도 모르시겠으면 그 화면을 캡처해서 담당자에게 보내주세요.</p>'
+});
+
+/* 8. 메뉴 */
+STEPS.push({ title:"메뉴와 가격 넣기", cta:"넣었습니다", html:
+  '<p>여기까지 오시면 거의 끝입니다.</p>' +
+  '<ol>' +
+  '<li><b>[매장] › [매장 정보] › [가격정보]</b>로 들어갑니다.</li>' +
+  '<li>본사가 보내드린 <b>가격표대로</b> 메뉴를 하나씩 추가합니다.</li>' +
+  '<li>메뉴마다 <b>이름과 가격</b>을 넣고, 본사 <b>메뉴 사진</b>을 함께 올립니다.</li>' +
+  '</ol>' +
+  (S.menuFileUrl ? '<a class="cta cta-2" href="' + S.menuFileUrl + '" target="_blank" rel="noopener">메뉴 사진·가격표 받기</a>' :
+    '<div class="box"><p>파일을 못 받으셨으면 담당자에게 요청해 주세요.</p></div>') +
+  '<div class="box box-warn"><p><b>직접 찍으신 메뉴 사진은 올리지 말아 주세요.</b> 매장마다 화면이 달라 보이면 브랜드가 흐려집니다.</p></div>' +
+  ((S.pick[0] || S.pick[1]) ?
+    '<h3>[추천] 체크는 두 개만</h3>' +
+    '<p>추천으로 체크한 메뉴는 카카오맵에서 크게 강조돼 보입니다. 아래 두 개에만 체크해 주세요.</p>' +
+    '<div class="box"><p style="margin-bottom:0"><b>' + esc(S.pick.filter(Boolean).join(" · ")) + '</b></p></div>'
+    :
+    '<h3>[추천] 체크는 두 개만</h3>' +
+    '<p>카카오맵에서 크게 강조돼 보이는 자리입니다. <b>어떤 메뉴로 할지 담당자에게 확인 후</b> 체크해 주세요.</p>')
+});
+
+/* 9. 사진 */
+STEPS.push({ title:"매장 사진 올리기", cta:"올렸습니다", html:
+  '<p><b>[매장] › [매장 정보] › [매장 사진]</b>으로 들어갑니다.</p>' +
+  '<h3>사장님이 직접 찍어주실 사진</h3>' +
+  '<ul>' +
+  '<li>매장 <b>바깥에서 간판이 보이게</b> 한두 장</li>' +
+  '<li>매장 <b>안쪽 전체가 보이게</b> 두세 장</li>' +
+  '</ul>' +
+  '<div class="box"><div class="box-title">잘 나오게 찍는 법</div>' +
+  '<p style="margin-bottom:0">휴대폰을 <b>가로로</b> 눕히고, <b>낮에</b>, <b>불을 다 켜고</b> 찍으시면 훨씬 잘 나옵니다.</p></div>' +
+  '<h3>올린 뒤에 할 일</h3>' +
+  '<ol>' +
+  '<li>사진 왼쪽 아래 <b>#</b> 버튼을 눌러 종류를 골라줍니다.<br>' +
+    '<span class="muted" style="font-size:18px">바깥 모습은 #전경, 안쪽은 #실내, 음식은 #음식</span></li>' +
+  '<li><b>맨 앞 사진이 대표 사진으로 나갑니다.</b> 본사가 보내드린 대표 사진을 맨 앞으로 옮겨주세요.</li>' +
+  '</ol>' +
+  '<p class="muted" style="font-size:18px">순서 바꾸기 — [전체] 버튼을 누르고 사진을 끌어서 옮기시면 됩니다.</p>' +
+  shot('사진 태그 다는 화면')
+});
+
+/* 10. 완료 */
+STEPS.push({ done:true, title:"다 하셨습니다", cta:"", html:
+  '<p class="lead">고생하셨습니다. 이제 담당자에게 알려주시면 본사에서 카카오맵에 잘 올라갔는지 확인해 드립니다.</p>' +
+  '<div class="box"><div class="box-title">알려주실 내용</div>' +
+  '<p style="margin-bottom:0">“' + esc(S.name) + ' 브랜드 라디오·카카오맵 둘 다 완료했습니다”</p></div>' +
+  '<h3>바로 안 보여도 정상입니다</h3>' +
+  '<p>등록이 끝나도 실제 카카오맵 지도에 나오기까지 하루 이틀 걸립니다. <b>사흘이 지나도 안 보이면</b> 담당자에게 알려주세요.</p>'
+});
+
+/* ── 동작 ─────────────────────────────────────────────── */
+const main = document.getElementById("main");
+const ft = document.getElementById("ft");
+const hd = document.getElementById("hd");
+const KEY = "mirye-open-" + code;
+
+let i = 0;
+try { const v = +localStorage.getItem(KEY); if (v > 0 && v < STEPS.length) i = v; } catch(e){}
+
+function render(){
+  const s = STEPS[i];
+
+  hd.classList.toggle("hidden", !!s.cover);
+  document.getElementById("hdStore").textContent = S.name;
+  document.getElementById("hdCount").textContent = i + " / " + (STEPS.length - 1);
+  document.getElementById("hdBar").style.width = (i / (STEPS.length - 1) * 100) + "%";
+
+  main.innerHTML = (s.title ? '<h2>' + s.title + '</h2>' : '') + s.html;
+
+  ft.innerHTML =
+    (s.done
+      ? '<button class="cta cta-2" id="reset">처음부터 다시 보기</button>'
+      : '<button class="cta" id="next">' + s.cta + '</button>') +
+    (i > 0 ? '<button class="back" id="back">← 앞 화면</button>' : '');
+
+  const next = document.getElementById("next");
+  if (s.gate && next) {
+    next.disabled = true;
+    const boxes = [...main.querySelectorAll("[data-prep]")];
+    const sync = () => {
+      boxes.forEach(b => b.closest(".chk").classList.toggle("on", b.checked));
+      next.disabled = !boxes.every(b => b.checked);
+    };
+    boxes.forEach(b => b.addEventListener("change", sync));
+    sync();
+  }
+
+  main.querySelectorAll("[data-copy]").forEach(b => {
+    b.addEventListener("click", () => {
+      const t = b.dataset.copy;
+      const done = () => { b.textContent = "복사했습니다"; b.classList.add("ok");
+        setTimeout(() => { b.textContent = "복사하기"; b.classList.remove("ok"); }, 1800); };
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(done).catch(fallback);
+      else fallback();
+      function fallback(){
+        const ta = document.createElement("textarea");
+        ta.value = t; ta.style.position = "fixed"; ta.style.opacity = 0;
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand("copy"); done(); } catch(e){}
+        ta.remove();
+      }
+    });
+  });
+
+  if (next) next.addEventListener("click", () => go(i + 1));
+  const back = document.getElementById("back");
+  if (back) back.addEventListener("click", () => go(i - 1));
+  const reset = document.getElementById("reset");
+  if (reset) reset.addEventListener("click", () => go(0));
+}
+
+function go(n){
+  i = Math.max(0, Math.min(STEPS.length - 1, n));
+  try { localStorage.setItem(KEY, i); } catch(e){}
+  render();
+  window.scrollTo(0, 0);
+}
+
+render();
+</script>
+</body>
+</html>
