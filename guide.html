@@ -18,6 +18,7 @@ html{-webkit-text-size-adjust:100%}
 body{background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Apple SD Gothic Neo","Noto Sans KR","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;font-size:16px}
 img{display:block;max-width:100%}
 .wrap{max-width:560px;margin:0 auto}
+html[lang="zh"] body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC",sans-serif}
 .ko{font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif}
 
 /* ---------- language select ---------- */
@@ -143,12 +144,12 @@ ol.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:28
    ===================================================================== */
 const STORES = {
   gangnam: {
-    name: { ko:"강남점", en:"Gangnam", ja:"江南店" },
+    name: { ko:"강남점", en:"Gangnam", ja:"江南店", zh:"江南店" },
     hero: "hero",
     reviewUrl: "https://maps.app.goo.gl/YFbJRnma7QR369GL8"
   },
   seongsu: {
-    name: { ko:"성수점", en:"Seongsu", ja:"聖水店" },
+    name: { ko:"성수점", en:"Seongsu", ja:"聖水店", zh:"圣水店" },
     hero: "heroSeongsu",
     reviewUrl: ""   // ← 구글맵 등록 후 리뷰 링크 넣기 (비어 있으면 리뷰 섹션이 자동으로 숨겨짐)
   }
@@ -157,12 +158,12 @@ const STORES = {
 /* =====================================================================
    언어 목록 — 중국어 추가 시: 아래 TEXT에 zh 블록을 넣고 여기에 'zh' 추가
    ===================================================================== */
-const LANGS = ["en", "ja"];
+const LANGS = ["en", "ja", "zh"];
 
 const LANG_META = {
   en: { label: "English",  sub: "",  welcome: "Welcome",  choose: "Please choose your language" },
   ja: { label: "日本語",    sub: "Japanese", welcome: "ようこそ",   choose: "言語を選択してください" },
-  zh: { label: "中文",      sub: "Chinese",  welcome: "欢迎光临",   choose: "请选择语言" }
+  zh: { label: "中文",      sub: "简体中文",  welcome: "欢迎光临",   choose: "请选择语言" }
 };
 
 /* 메뉴·재료 공통 데이터 (사진·한글명은 언어와 무관) */
@@ -283,6 +284,55 @@ const TEXT = {
     rvBtn: "Googleマップで口コミを書く",
     thanks: ["味禮クッパにお越しいただき、誠にありがとうございます。🙇","韓国で楽しい時間をお過ごしください！❤️"],
     back: "言語を変更"
+  },
+
+  zh: {
+    title: "欢迎光临味禮汤饭！",
+    intro: [
+      "汤饭是韩国最受欢迎的国民美食之一，欢迎品尝！",
+      "汤饭（국밥）是将米饭搭配浓郁鲜美的热汤一起享用的韩国传统美食。",
+      "味禮汤饭在保留传统汤饭地道风味的同时，融入现代元素，让每个人都能轻松享用。"
+    ],
+    howTitle: "味禮汤饭推荐吃法",
+    how: [
+      { t:"先品尝一口原味浓汤，感受汤底的醇厚风味。" },
+      { t:"用虾酱调整咸淡，加入蒜末增添风味，最后撒上少许胡椒粉，让汤的香气更浓郁，味道更清爽。",
+        c:[["shrimp","虾酱"],["garlic","蒜末"],["pepper","胡椒粉"]] },
+      { t:"根据个人口味，加入紫苏籽粉、拌韭菜或韩式辣味调料，调出自己喜欢的味道！",
+        c:[["perilla","紫苏籽粉"],["chive","拌韭菜"],["sauce","韩式辣味调料"]] }
+    ],
+    chipsCap: "请根据桌上的韩文标签找到对应的调料。",
+    notes: [
+      "如需帮助，请随时向店员咨询！",
+      "小菜和餐盘可在自助区免费取用。"
+    ],
+    sidesTitle: "汤饭的美味搭配",
+    sides: {
+      sundae:["韩式蒸血肠 (Sundae)","在传统大锅中精心蒸制的韩国特色美食，口感软嫩湿润，内馅饱满。"],
+      suyuk: ["韩式水煮猪肉 (Suyuk)","韩国传统猪肉料理，将猪肉精心煮熟，肉质软嫩多汁，味道清淡鲜美。"],
+      jeyuk: ["韩式冷切猪肉 (Naeng Jeyuk)","韩国特色猪肉料理，将煮熟的猪肉冷却后切成薄片，搭配特制酱汁享用。"]
+    },
+    ingTitle: "一碗美味，以礼用心准备",
+    ing: {
+      pork:     ["新鲜韩国猪肉","严选新鲜的韩国本土猪肉。"],
+      kimchiIll:["每日现做辣泡菜","每天在店内亲手制作的招牌辣泡菜。"],
+      rice:     ["优质新东津大米","精选韩国优质新东津大米，米粒饱满、粒粒分明，与浓郁的汤底相得益彰。"]
+    },
+    kimchiTitle: "敢挑战辣味吗？🌶️",
+    kimchi: [
+      "我们的辣泡菜每天在店内新鲜制作，深受韩国顾客喜爱。",
+      "喜欢吃辣吗？一定要试试！🔥"
+    ],
+    rvTag: "GOOGLE REVIEW",
+    rvTitle: "在Google地图分享您的用餐体验",
+    rvLead: "用餐还满意吗？期待听到您的感受！",
+    rvBody: [
+      "欢迎在Google地图上分享您的用餐体验，让更多旅行者认识味禮汤饭。",
+      "您的每一条评价，都是对我们莫大的鼓励。❤️"
+    ],
+    rvBtn: "在Google地图写评价",
+    thanks: ["感谢您光临味禮汤饭！❤️","祝您在韩国旅途愉快！"],
+    back: "切换语言"
   }
 };
 
@@ -301,7 +351,7 @@ function guess(){
 
 function renderSelect(){
   $("#selHero").src = IMG[store.hero];
-  $("#selStore").innerHTML = `<span class="ko">${store.name.ko}</span> · ${active.map(l=>esc(store.name[l])).join(" · ")}`;
+  $("#selStore").innerHTML = `<span class="ko">${store.name.ko}</span> · ${[...new Set(active.map(l=>store.name[l]))].map(esc).join(" · ")}`;
   const g = guess();
   const order = g ? [g, ...active.filter(l => l !== g)] : active;
   $("#welcomeLine").textContent = order.map(l => LANG_META[l].welcome).join(" · ");
@@ -323,7 +373,7 @@ function renderGuide(l){
   document.documentElement.lang = l;
   $("#barStore").textContent = store.name.ko;
   $("#barLocal").textContent = store.name[l] || "";
-  document.title = l === "ja" ? "味禮クッパ ガイド" : "Mirye Gukbap Guide";
+  document.title = l === "ja" ? "味禮クッパ ガイド" : l === "zh" ? "味禮汤饭 指南" : "Mirye Gukbap Guide";
   $("#switch").innerHTML = active.map(x =>
     `<button data-l="${x}" class="${x===l?"on":""}">${esc(LANG_META[x].label)}</button>`).join("");
   document.querySelectorAll("#switch button").forEach(b => b.onclick = () => go(b.dataset.l));
